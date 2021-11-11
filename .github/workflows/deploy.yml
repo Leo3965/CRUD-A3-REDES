@@ -2,7 +2,7 @@ on: push
 name: Build and Publish Project
 jobs:
   FRONTEND:
-    name: FRONTEND
+    name: Frontend
     if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
@@ -10,13 +10,23 @@ jobs:
         with:
           fetch-depth: 2
 
-      - name: NodeJs
-        uses: action/setup-node@v1
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v1
         with:
           node-version: "14.x"
 
-      - name: Build Project
+      - name: Build React
         run: |
           cd frontend
           yarn install
           yarn build
+
+      - name: Deploy to Netlify
+        uses: South-Paw/action-netlify-deploy@v1.2.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          netlify-auth-token: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          netlify-site-id: ${{ secrets.NETLIFY_SITE_ID }}
+          build-dir: './build'
+          draft: true
+          comment-on-commit: true
