@@ -1,0 +1,22 @@
+on: push
+name: Build and Publish Project
+jobs:
+  FRONTEND:
+    name: FRONTEND
+    if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+        with:
+          fetch-depth: 2
+
+      - name: NodeJs
+        uses: action/setup-node@v1
+        with:
+          node-version: "14.x"
+
+      - name: Build Project
+        run: |
+          cd frontend
+          yarn install
+          yarn build
