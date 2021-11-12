@@ -1,0 +1,77 @@
+.signUp {
+    background: var(--primary);
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.signUp section {
+    width: 350px;
+    height: 300px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.signUp section > div {
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.signUp section input {
+    height: 50px;
+    border: 0;
+    font-family: var(--font);
+    font-size: 16px;
+    padding-left: 10px;
+    color: var(--primary);
+    font-weight: 500;
+}
+
+.signUp section     input:focus, textarea:focus, select:focus{
+    outline: none;
+}
+
+.signUp footer {
+    margin-top: 10px;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.signUp button {
+    height: 50px;
+    width: 45%;
+    border: 0;
+    background: var(--tertiary);
+    font-size: var(--font);
+    color: var(--white);
+    font-weight: bold;
+}
+
+.signUp button:nth-child(2) {
+    background: var(--quartenary);
+    color: var(--secondary);
+}
+
+.signUp button:hover {
+    filter: brightness(90%);
+    cursor: pointer;
+}
+
+.errors {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    color: var(--white);
+    font-weight: 600;
+    font-size: 16px;
+}
+

@@ -1,26 +1,13 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {PublicRoutes} from "./routes/PublicRoutes";
+import {useContext} from "react";
+import {AuthContext} from "./context/AuthContext";
+import {PrivateRoutes} from "./routes/PrivateRoutes";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Testing Deploy
-        </a>
-      </header>
-    </div>
-  );
+export const App = () => {
+    const {signed} = useContext(AuthContext)
+    return (
+        <>
+            {signed ? <PrivateRoutes /> : <PublicRoutes />}
+        </>
+    )
 }
-
-export default App;
