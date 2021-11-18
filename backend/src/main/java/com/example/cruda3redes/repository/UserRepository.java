@@ -4,6 +4,8 @@ package com.example.cruda3redes.repository;
 import com.example.cruda3redes.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository<User, Long> {
+import java.util.Optional;
 
+public interface UserRepository extends JpaRepository<User, Long> {
+    Optional<User> findByLogin(String login);
 }
