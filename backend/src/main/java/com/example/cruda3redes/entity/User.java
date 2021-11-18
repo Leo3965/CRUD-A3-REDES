@@ -6,8 +6,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 @Data
 @RequiredArgsConstructor
@@ -17,7 +16,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
     @Column(nullable = false)
     @NonNull
@@ -28,6 +27,27 @@ public class User {
     private String login;
 
     @NonNull
+    @Column(nullable = false, unique = true)
+    private String email;
+
+    @NonNull
     @Column(nullable = false)
     private String password;
+
+    @Column(nullable = false)
+    private Date createdAt;
+
+    @Column(nullable = false)
+    private Date updatedAt;
+
+    @PrePersist()
+    public void beforeInsert() {
+        this.createdAt = new Date();
+        this.updatedAt = new Date();
+    }
+
+    @PreUpdate()
+    public void beforeUpdate() {
+        this.updatedAt = new Date();
+    }
 }

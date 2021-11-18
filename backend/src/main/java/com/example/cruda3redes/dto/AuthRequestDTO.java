@@ -1,4 +1,4 @@
-package com.example.cruda3redes.request;
+package com.example.cruda3redes.dto;
 
 import lombok.Data;
 
@@ -6,7 +6,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
 @Data
-public class Login {
+public class AuthRequestDTO {
 
     @NotEmpty
     @NotBlank
