@@ -1,18 +1,18 @@
 package com.example.cruda3redes.service;
 
-import com.example.cruda3redes.entity.User;
-import com.example.cruda3redes.entity.UserDetailsImpl;
-import com.example.cruda3redes.repository.UserRepository;
+import java.util.List;
+import java.util.Optional;
+
 import com.example.cruda3redes.dto.CreateUserRequestDTO;
+import com.example.cruda3redes.entity.User;
+import com.example.cruda3redes.repository.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -30,7 +30,7 @@ public class UserService implements UserDetailsService {
             throw new UsernameNotFoundException("User not founded");
         }
 
-        return new UserDetailsImpl(optionalUser.get());
+        return optionalUser.get();
     }
 
     public void createUser(CreateUserRequestDTO userDto) {
