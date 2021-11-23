@@ -1,8 +1,8 @@
 on: push
 name: Build and Publish Project
 jobs:
-  FRONTEND:
-    name: Frontend
+  deploy:
+    name: Deploy A3
     if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
@@ -21,7 +21,7 @@ jobs:
           yarn install
           yarn build
 
-      - name: Deploy to Netlify
+      - name: Deploy Front to Netlify
         uses: South-Paw/action-netlify-deploy@v1.2.0
         with:
           github-token: ${{ secrets.PAT_GITHUB }}
@@ -30,9 +30,11 @@ jobs:
           build-dir: "./frontend/build"
           draft: true
           comment-on-commit: true
+
       - name: Deploy Spring to Heroku
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
           heroku_email: ${{secrets.HEROKU_EMAIL}}
+          appdir: "backend"
