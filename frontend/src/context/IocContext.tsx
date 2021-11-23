@@ -1,26 +1,25 @@
-import {ApiClient} from "../clients/ApiClient";
-import {createContext, FunctionComponent, useEffect, useState} from "react";
+import { createContext, FunctionComponent, useEffect, useState } from "react";
+import { ApiClient } from "../clients/ApiClient";
+import { Env } from "../Env";
 
 interface IIocContext {
-    apiClient: ApiClient
-}
-
-interface IocProviderProps {
-    apiHost: string;
+  apiClient: ApiClient;
 }
 
 export const IocContext = createContext<IIocContext>({
-    apiClient: new ApiClient('')
-})
+  apiClient: new ApiClient(String(Env.API_HOST)),
+});
 
-export const IocProvider: FunctionComponent<IocProviderProps> = ({apiHost, children}) => {
-    const [apiClient, setApiClient] = useState(new ApiClient(''))
+export const IocProvider: FunctionComponent = ({ children }) => {
+  const [apiClient, setApiClient] = useState(
+    new ApiClient(String(Env.API_HOST))
+  );
 
-    useEffect(() => {
-        setApiClient(new ApiClient(apiHost))
-    }, [apiHost])
+  useEffect(() => {
+    setApiClient(new ApiClient(String(Env.API_HOST)));
+  }, []);
 
-    return <IocContext.Provider value={{apiClient}}>
-        {children}
-    </IocContext.Provider>
-}
+  return (
+    <IocContext.Provider value={{ apiClient }}>{children}</IocContext.Provider>
+  );
+};

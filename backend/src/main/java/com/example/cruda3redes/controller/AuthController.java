@@ -33,12 +33,8 @@ public class AuthController {
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<AuthResponseDTO> login(@RequestBody @Valid AuthRequestDTO request) {
         try {
-            Authentication authentication = this.authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(
-                            request.getLogin(),
-                            request.getPassword()
-                    )
-            );
+            Authentication authentication = this.authenticationManager
+                    .authenticate(new UsernamePasswordAuthenticationToken(request.getLogin(), request.getPassword()));
 
             User user = (User) authentication.getPrincipal();
 
