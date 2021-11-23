@@ -1,15 +1,17 @@
-import {Route, Routes} from "react-router-dom";
-import {HomePage} from "../pages/HomePage";
-import {UserPage} from "../pages/UserPage";
-import {UsersPage} from "../pages/UsersPage";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { HomePage } from "../pages/Home/HomePage";
+import { UserPage } from "../pages/User/UserPage";
+import { UsersPage } from "../pages/Users/UsersPage";
 
 export const PrivateRoutes = () => {
-    return(
-        <Routes>
-            <Route path="/user" element={<UserPage />}/>
-            <Route path="/user/:id" element={<UserPage />}/>
-            <Route path="/users" element={<UsersPage/>}/>
-            <Route path="*" element={<HomePage />}/>
-        </Routes>
-    )
-}
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/user" element={<UserPage />} />
+        <Route path="/user/:id" element={<UserPage />} />
+        <Route path="/users" element={<UsersPage />} />
+        <Route path="*" element={<HomePage />} />
+      </Routes>
+    </BrowserRouter>
+  );
+};

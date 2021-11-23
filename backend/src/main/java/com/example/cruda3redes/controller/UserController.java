@@ -37,12 +37,6 @@ public class UserController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<UserResponseDTO>> fetchUsers() {
-        return ResponseEntity.ok(
-            this.userService
-                .findAll()
-                .stream()
-                .map(user -> new UserResponseDTO(user))
-                .toList()
-        );
+        return ResponseEntity.ok(this.userService.findAll().stream().map(user -> new UserResponseDTO(user)).toList());
     }
 }

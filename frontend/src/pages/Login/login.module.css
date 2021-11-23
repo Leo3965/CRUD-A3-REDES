@@ -1,65 +1,67 @@
 .login {
-    background: var(--primary);
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  background: var(--primary);
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .login section {
-    width: 350px;
-    height: 250px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+  width: 350px;
+  height: 250px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 .login section > div {
-    height: 200px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 
 .login section input {
-    height: 50px;
-    border: 0;
-    font-family: var(--font);
-    font-size: 16px;
-    padding-left: 10px;
-    color: var(--primary);
-    font-weight: 500;
+  height: 50px;
+  border: 0;
+  font-family: var(--font);
+  font-size: 16px;
+  padding-left: 10px;
+  color: var(--primary);
+  font-weight: 500;
 }
 
-.login section     input:focus, textarea:focus, select:focus{
-    outline: none;
+.login section input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
 }
 
 .login footer {
-    margin-top: 10px;
-    height: 100px;
-    display: flex;
-    justify-content: space-between;
+  margin-top: 10px;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .login button {
-    height: 50px;
-    width: 45%;
-    border: 0;
-    background: var(--tertiary);
-    font-size: var(--font);
-    color: var(--white);
-    font-weight: bold;
+  height: 50px;
+  width: 45%;
+  border: 0;
+  background: var(--tertiary);
+  font-size: var(--font);
+  color: var(--white);
+  font-weight: bold;
 }
 
 .login button:nth-child(2) {
-    background: var(--quartenary);
-    color: var(--secondary);
+  background: var(--quartenary);
+  color: var(--secondary);
 }
 
 .login button:hover {
-    filter: brightness(90%);
-    cursor: pointer;
+  filter: brightness(90%);
+  cursor: pointer;
 }
