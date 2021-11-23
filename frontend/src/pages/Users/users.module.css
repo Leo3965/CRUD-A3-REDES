@@ -1,0 +1,19 @@
+.table {
+  background: var(--primary);
+  font-family: var(--font);
+  color: var(--white);
+  font-size: 24px;
+  text-align: center;
+}
+
+.table th {
+  background: #222222;
+  border-radius: 10;
+  padding: 20px;
+}
+
+.table td {
+  background-color: #111111;
+  border-radius: 10;
+  padding: 20px;
+}

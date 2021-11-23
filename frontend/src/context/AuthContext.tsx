@@ -1,51 +1,62 @@
-import {User} from "../types/User";
-import {createContext, FunctionComponent, useContext, useEffect, useState} from "react";
-import {IocContext} from "./IocContext";
+import {
+  createContext,
+  FunctionComponent,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import { User } from "../types/User";
+import { IocContext } from "./IocContext";
 
 interface IAuthContext {
-    signed: boolean;
-    user: User | null
-    token: string | null
-    signIn: (login: string, password: string) => Promise<void>
-    signOut: () => void
+  signed: boolean;
+  user: User | null;
+  token: string | null;
+  signIn: (login: string, password: string) => Promise<void>;
+  signOut: () => void;
 }
 
 export const AuthContext = createContext<IAuthContext>({
-    signed: false,
-    user: null,
-    token: null,
-    signIn: (login: string, password: string) => Promise.resolve(),
-    signOut: () => {
-    }
-})
+  signed: false,
+  user: null,
+  token: null,
+  signIn: (login: string, password: string) => Promise.resolve(),
+  signOut: () => {},
+});
 
-export const AuthProvider: FunctionComponent = ({children}) => {
-    const [loading, setLoading] = useState(true);
-    const [user, setUser] = useState<User | null>(null)
-    const [token, setToken] = useState<string | null>(null)
-    const {apiClient} = useContext(IocContext)
+export const AuthProvider: FunctionComponent = ({ children }) => {
+  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState<User | null>(null);
+  const [token, setToken] = useState<string | null>(null);
+  const { apiClient } = useContext(IocContext);
 
-    useEffect(() => {
-        setUser(JSON.parse(localStorage.get('user')));
-        setToken(localStorage.get('token'))
-        setLoading(false);
-    }, [])
+  useEffect(() => {
+    setUser(JSON.parse(String(localStorage.getItem("user"))));
+    setToken(localStorage.getItem("token"));
+    setLoading(false);
+  }, []);
 
-    const signIn = async (login: string, password: string) => {
-        const {token} = await apiClient.auth(login, password);
-        const user = await apiClient.getAuth(token);
-        localStorage.setItem('token', token);
-        localStorage.setItem('user', JSON.stringify(user));
-    }
+  const signIn = async (login: string, password: string) => {
+    const { jwt } = await apiClient.auth(login, password);
+    const user = await apiClient.getAuth(jwt);
+    localStorage.setItem("token", jwt);
+    localStorage.setItem("user", JSON.stringify(user));
+    setUser(user);
+    setToken(jwt);
+  };
 
-    const signOut = async () => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
-    }
+  const signOut = async () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    setUser(null);
+    setToken(null);
+  };
 
-    return (
-        <AuthContext.Provider value={{signed: Boolean(user), user, signIn, signOut, token}}>
-            {loading ? <div>Loading...</div> : (children)}
-        </AuthContext.Provider>
-    )
-}
+  return (
+    <AuthContext.Provider
+      value={{ signed: Boolean(user), user, signIn, signOut, token }}
+    >
+      {loading ? <div>Loading...</div> : children}
+    </AuthContext.Provider>
+  );
+};
