@@ -14,7 +14,7 @@
     <name>CRUD-A3-REDES</name>
     <description>CRUD-A3-REDES</description>
     <properties>
-        <java.version>17</java.version>
+        <java.version>1.8</java.version>
     </properties>
     <dependencies>
         <dependency>
