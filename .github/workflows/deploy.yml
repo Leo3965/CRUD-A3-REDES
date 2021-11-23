@@ -28,6 +28,8 @@ jobs:
           cd frontend
           yarn install
           yarn build
+        env:
+          REACT_APP_API_HOST: ${{secrets.REACT_APP_API_HOST}}
 
       - name: Deploy Front to Netlify
         uses: South-Paw/action-netlify-deploy@v1.2.0
